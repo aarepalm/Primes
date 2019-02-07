@@ -1,15 +1,31 @@
 class Primes {
-	public static void main(String[] args) {
-		final long max = 1000000;
-		long counter = 0;
+
+	long nofPrimes;
+	long startTime;
+
+	Primes() {
+		nofPrimes = 0;
+		startTime = System.currentTimeMillis();
+	}
+
+	void printInfo() {
+		long elapsedTime = System.currentTimeMillis() - startTime;
+		if (elapsedTime < 1000) {
+			System.out.println("Already found " + nofPrimes + " primes, time spent in milliseconds " + elapsedTime);
+		}
+		else {
+			elapsedTime /=1000;
+			System.out.println("Already found " + nofPrimes + " primes, time spent less than " + (elapsedTime+1) + "seconds");
+		}
+		startTime = System.currentTimeMillis();
+	}
+
+	void calculatePrimes(int nofPrimesGoal) {
 		boolean notAPrime = false;
-		for (int i = 2; i < max; ++i)
-		{
+		for (int i = 2; nofPrimes < nofPrimesGoal ; ++i) {
 			notAPrime = false;
-			for (int j = 2; j < i; ++j)
-			{
-				if (((i % j) == 0) && (i != j))
-				{
+			for (int j = 2; j < i; ++j)	{
+				if (((i % j) == 0) && (i != j))	{
 					notAPrime = true;
 					break;
 				}
@@ -17,10 +33,14 @@ class Primes {
 			if (notAPrime)
 				continue;
 
-			++counter;
-			if ((counter % 1000) == 0)
-				System.out.println("Already found " + counter + " primes");
+			++nofPrimes;
+			if ((nofPrimes % 1000) == 0)
+				printInfo();
 		}
+	}
 
+	public static void main(String[] args) {
+		Primes primes = new Primes();
+		primes.calculatePrimes(100000);
 	}
 }
