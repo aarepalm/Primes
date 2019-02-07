@@ -41,6 +41,10 @@ class Primes {
 
 	public static void main(String[] args) {
 		Primes primes = new Primes();
-		primes.calculatePrimes(100000);
+		System.out.println("This program calculates 50000 prime numbers and prints info messages after every 1000");
+		final int nofPrimesGoal = 50000;
+		long totalStartTime = System.currentTimeMillis();
+		primes.calculatePrimes(nofPrimesGoal);
+		System.out.println("Total time spent " + (System.currentTimeMillis() - totalStartTime)/1000 + "seconds");
 	}
 }
